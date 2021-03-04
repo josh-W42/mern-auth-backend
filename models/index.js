@@ -1,6 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 
+// Better Practice to hid the mongo url
 const { MONGO_URL } = process.env;
 const configOptions = {
     useNewUrlParser: true,
@@ -15,4 +16,5 @@ mongoose.connect(MONGO_URL, configOptions)
 
 module.exports = {
     Example: require('./example'),
-};
+    User: require('./user'),
+}
