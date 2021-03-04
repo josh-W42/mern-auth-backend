@@ -14,6 +14,7 @@ const test = (req, res) => {
   res.json({ message: 'User endpoint OK!' });
 }
 
+// Controller for Registering a new User.
 const register = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -45,7 +46,7 @@ const register = async (req, res) => {
   }
 }
 
-
+// Controller for logging in.
 const login = async (req, res) => {
   const { email, password } = req.body;
 
@@ -93,7 +94,13 @@ const login = async (req, res) => {
   }
 }
 
+// Get Profile information
+const profile = (req, res) => {
+  const { id, name, email } = req.user;
+  res.json({ id, name, email });
+}
+
 // export all route functions
 module.exports = {
-  test, register, login
+  test, register, login, profile
 }
