@@ -10,7 +10,7 @@ const { JWT_SECRET } = process.env;
 const db = require('../models');
 
 // basic test 
-const test = (req, res) => {
+const test = async (req, res) => {
   res.json({ message: 'User endpoint OK!' });
 }
 
@@ -23,7 +23,7 @@ const register = async (req, res) => {
     const user = await db.User.findOne({ email });
 
     // But What about mongo validation? we could use the unique: true
-    if (user) throw new Error('Eamil already exists');
+    if (user) throw new Error('Email already exists');
 
     // Create a new user.
     const newUser = await db.User.create({ name, email, password });
@@ -90,6 +90,7 @@ const login = async (req, res) => {
     });
     
   } catch (error) {
+    console.error(error);
     res.status(400).json({ message: error.message});
   }
 }
